@@ -18,7 +18,7 @@ describe('Comment on Question', () => {
     )
   })
 
-  it('should be able to comment on quesiton', async () => {
+  it('should be able to comment on question', async () => {
     const question = makeQuestion()
 
     await inMemoryQuestionsRepository.create(question)
