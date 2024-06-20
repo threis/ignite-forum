@@ -1,6 +1,6 @@
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { DeleteAnswerUseCase } from './delete-answer'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { makeAnswer } from 'test/factories/make-answer'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 import { makeAnswerAttachment } from 'test/factories/make-answer-attachment'
@@ -23,19 +23,19 @@ describe('Delete Answer', () => {
   it('should be able to delete a answer', async () => {
     const newAnswer = makeAnswer(
       {
-        authorId: new UniqueEntityId('author-1'),
+        authorId: new UniqueEntityID('author-1'),
       },
-      new UniqueEntityId('answer-1'),
+      new UniqueEntityID('answer-1'),
     )
 
     inMemoryAnswerAttachmentsRepository.items.push(
       makeAnswerAttachment({
         answerId: newAnswer.id,
-        attachmentId: new UniqueEntityId('1'),
+        attachmentId: new UniqueEntityID('1'),
       }),
       makeAnswerAttachment({
         answerId: newAnswer.id,
-        attachmentId: new UniqueEntityId('2'),
+        attachmentId: new UniqueEntityID('2'),
       }),
     )
 
@@ -53,9 +53,9 @@ describe('Delete Answer', () => {
   it('should not be to able delete a answer from another user', async () => {
     const newAnswer = makeAnswer(
       {
-        authorId: new UniqueEntityId('author-1'),
+        authorId: new UniqueEntityID('author-1'),
       },
-      new UniqueEntityId('answer-1'),
+      new UniqueEntityID('answer-1'),
     )
 
     inMemoryAnswersRepository.create(newAnswer)

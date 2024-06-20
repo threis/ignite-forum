@@ -6,7 +6,7 @@ import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 import { AnswerAttachmentsRepository } from '../repositories/answer-attachments-repository'
 import { AnswerAttachmentList } from '../../enterprise/entities/answer-attachment-list'
 import { AnswerAttachment } from '../../enterprise/entities/answer-attachment'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 interface EditAnswerUseCaseRequest {
   authorId: string
@@ -53,7 +53,7 @@ export class EditAnswerUseCase {
 
     const answerAttachments = attachmentsIds.map((attachmentId) => {
       return AnswerAttachment.create({
-        attachmentId: new UniqueEntityId(attachmentId),
+        attachmentId: new UniqueEntityID(attachmentId),
         answerId: answer.id,
       })
     })

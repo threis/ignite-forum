@@ -1,6 +1,6 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { EditQuestionUseCase } from './edit-question'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'
@@ -26,9 +26,9 @@ describe('Edit Question', () => {
   it('should be able to edit a question', async () => {
     const newQuestion = makeQuestion(
       {
-        authorId: new UniqueEntityId('author-1'),
+        authorId: new UniqueEntityID('author-1'),
       },
-      new UniqueEntityId('question-1'),
+      new UniqueEntityID('question-1'),
     )
 
     await inMemoryQuestionsRepository.create(newQuestion)
@@ -36,11 +36,11 @@ describe('Edit Question', () => {
     inMemoryQuestionAttachmentsRepository.items.push(
       makeQuestionAttachment({
         questionId: newQuestion.id,
-        attachmentId: new UniqueEntityId('1'),
+        attachmentId: new UniqueEntityID('1'),
       }),
       makeQuestionAttachment({
         questionId: newQuestion.id,
-        attachmentId: new UniqueEntityId('2'),
+        attachmentId: new UniqueEntityID('2'),
       }),
     )
 
@@ -62,17 +62,17 @@ describe('Edit Question', () => {
     expect(
       inMemoryQuestionsRepository.items[0].attachments.currentItems,
     ).toEqual([
-      expect.objectContaining({ attachmentId: new UniqueEntityId('1') }),
-      expect.objectContaining({ attachmentId: new UniqueEntityId('3') }),
+      expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
+      expect.objectContaining({ attachmentId: new UniqueEntityID('3') }),
     ])
   })
 
   it('should not be to able edit a question from another user', async () => {
     const newQuestion = makeQuestion(
       {
-        authorId: new UniqueEntityId('author-1'),
+        authorId: new UniqueEntityID('author-1'),
       },
-      new UniqueEntityId('question-1'),
+      new UniqueEntityID('question-1'),
     )
 
     inMemoryQuestionsRepository.create(newQuestion)
